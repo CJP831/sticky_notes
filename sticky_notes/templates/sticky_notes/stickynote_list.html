@@ -1,0 +1,27 @@
+{% extends "sticky_notes/base.html" %}
+
+{% block title %}Sticky Notes{% endblock %}
+
+{% block content %}
+<div class="page-heading">
+    <div>
+        <p class="eyebrow">Your Notes Board</p>
+        <h1>What's on your mind?</h1>
+    </div>
+</div>
+<section class="note-grid" aria-label="Sticky notes">
+    {% for note in notes %}
+    <article class="note-card">
+        <h2><a href="{% url 'sticky_note_detail' note.pk %}">{{ note.title }}</a></h2>
+        <p>{{ note.content|truncatewords:30|linebreaksbr }}</p>
+        <p><small>Updated {{ note.updated_at|date:"M j, Y, P" }}</small></p>
+        <nav class="note-actions" aria-label="Actions for {{ note.title }}">
+            <a class="button button-primary" href="{% url 'sticky_note_update' note.pk %}">Edit</a>
+            <a class="button button-danger" href="{% url 'sticky_note_delete' note.pk %}">Delete</a>
+        </nav>
+    </article>
+    {% empty %}
+    <p class="empty-state">No sticky notes yet...</p>
+    {% endfor %}
+</section>
+{% endblock %}

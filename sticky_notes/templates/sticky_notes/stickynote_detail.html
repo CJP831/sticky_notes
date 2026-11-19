@@ -1,0 +1,17 @@
+{% extends "sticky_notes/base.html" %}
+
+{% block title %}{{ note.title }}{% endblock %}
+
+{% block content %}
+<article class="note-detail">
+    <h1>{{ note.title }}</h1>
+    <div class="note-body">{{ note.content|linebreaksbr }}</div>
+    <p class="note-meta">Created {{ note.created_at|date:"M j, Y, P" }} · Updated {{ note.updated_at|date:"M j, Y, P" }}
+    </p>
+    <nav class="note-actions" aria-label="Note actions">
+        <a class="button button-primary" href="{% url 'sticky_note_update' note.pk %}">Edit note</a>
+        <a class="button button-danger" href="{% url 'sticky_note_delete' note.pk %}">Delete</a>
+        <a class="text-link" href="{% url 'sticky_note_list' %}">Back to All Notes</a>
+    </nav>
+</article>
+{% endblock %}

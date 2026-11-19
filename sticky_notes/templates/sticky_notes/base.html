@@ -1,0 +1,25 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}What's on your mind?{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'sticky_notes/styles.css' %}">
+</head>
+
+<body>
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Main navigation">
+            <a class="brand" href="{% url 'sticky_note_list' %}">Sticky Notes</a>
+            <a class="button button-primary" href="{% url 'sticky_note_create' %}">New note</a>
+        </nav>
+    </header>
+
+    <main class="page-content">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+
+</html>

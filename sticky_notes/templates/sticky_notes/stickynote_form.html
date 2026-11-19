@@ -1,0 +1,28 @@
+{% extends "sticky_notes/base.html" %}
+
+{% block title %}{% if object %}Edit{% else %}Create{% endif %} Sticky Note{% endblock %}
+
+{% block content %}
+<section class="form-panel">
+    <p class="eyebrow">{% if object %}Have an idea?{% else %}Jot it down!{% endif %}</p>
+    <h1>{% if object %}Edit{% else %}Create{% endif %} Sticky Note</h1>
+    <form class="note-form" method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <p>
+            {{ form.title.label_tag }}
+            {{ form.title }}
+            {{ form.title.errors }}
+        </p>
+        <p>
+            {{ form.content.label_tag }}
+            {{ form.content }}
+            {{ form.content.errors }}
+        </p>
+        <div class="form-actions">
+            <button class="button button-primary" type="submit">Save Note</button>
+            <a class="text-link" href="{% url 'sticky_note_list' %}">Cancel</a>
+        </div>
+    </form>
+</section>
+{% endblock %}
